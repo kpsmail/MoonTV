@@ -151,10 +151,6 @@
       "name": "优质资源库",
       "detail": "yzzy.tv"
     },
-    "aosika": {
-      "api": "https://aosikazy.com/api.php/provide/vod",
-      "name": "18奥斯卡"
-    },
     "baidu": {
       "api": "http://api.apibdzy.com/api.php/provide/vod",
       "name": "百度资源"
