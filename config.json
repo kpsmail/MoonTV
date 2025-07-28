@@ -88,6 +88,91 @@
     "18": {
       "api": "https://api.bwzyz.com/api.php/provide/vod",
       "name": "18"
+    },
+    "huweiba": {
+      "api": "https://hw8.live/api.php/provide/vod",
+      "name": "华为吧|点播"
+    },
+    "fuju": {
+      "api": "http://www.fuju2024.cc:8013/ruifenglb_api.php/provide/vod",
+      "name": "腐剧|点播"
+    },
+    "jinying": {
+      "api": "https://jinyingzy.com/api.php/provide/vod",
+      "name": "金鹰|点播"
+    },
+    "ok": {
+      "api": "https://okzyw9.com/api.php/provide/vod",
+      "name": "OK|点播"
+    },
+    "baopian": {
+      "api": "https://zpsps.com/api.php/provide/vod",
+      "name": "宝片|点播"
+    },
+    "xiaohuangren": {
+      "api": "https://iqyi.xiaohuangrentv.com/api.php/provide/vod",
+      "name": "小黄人|点播"
+    },
+    "niuniu": {
+      "api": "https://api.niuniuzy.me/api.php/provide/vod",
+      "name": "牛牛|点播"
+    },
+    "yaya": {
+      "api": "https://cj.yayazy.net/api.php/provide/vod",
+      "name": "丫丫|点播"
+    },
+    "yingtu": {
+      "api": "https://cj.vodimg.top/api.php/provide/vod",
+      "name": "影图|点播"
+    },
+    "uku": {
+      "api": "https://api.ukuapi.com/api.php/provide/vod",
+      "name": "U酷|点播"
+    },
+    "haohua": {
+      "api": "https://hhzyapi.com/api.php/provide/vod",
+      "name": "豪华|点播"
+    },
+    "suoni": {
+      "api": "https://suoniapi.com/api.php/provide/vod",
+      "name": "索尼|点播"
+    },
+    "hongniu": {
+      "api": "https://www.hongniuzy2.com/api.php/provide/vod",
+      "name": "红牛|点播"
+    },
+    "kuaiche": {
+      "api": "https://caiji.kczyapi.com/api.php/provide/vod",
+      "name": "快车|点播"
+    },
+    "shandian": {
+      "api": "http://sdzyapi.com/api.php/provide/vod",
+      "name": "闪电|点播"
+    },
+    "huya": {
+      "api": "https://www.huyaapi.com/api.php/provide/vod",
+      "name": "虎牙|点播"
+    },
+    "piaoling": {
+      "api": "https://p2100.net/api.php/provide/vod",
+      "name": "飘零|点播"
+    },
+    "subo": {
+      "api": "https://subocaiji.com/api.php/provide/vod",
+      "name": "速博|点播"
+    },
+    "modu": {
+      "api": "https://caiji.moduapi.cc/api.php/provide/vod",
+      "name": "魔都|点播"
+    },
+    "zuidazy": {
+      "api": "http://zuidazy.me/api.php/provide/vod",
+      "name": "最大|点播"
+    },
+    "xinlang": {
+      "api": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
+      "name": "新浪|点播"
     }
   }
 }
+
