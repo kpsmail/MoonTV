@@ -87,7 +87,11 @@
     },
     "bwzyz": {
       "api": "https://api.bwzyz.com/api.php/provide/vod",
-      "name": "18百万色片"
+      "name": "18-百万色片"
+    },
+    "aosika": {
+      "api": "https://aosikazy.com/api.php/provide/vod",
+      "name": "18-奥斯卡"
     },
     "jinying": {
       "api": "https://jinyingzy.com/api.php/provide/vod",
