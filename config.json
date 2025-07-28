@@ -90,7 +90,7 @@
       "name": "百万资源站"
     },
     "aosikazy": {
-      "api": "https://aosikazy.com/api.php/provide/vod/?ac=list",
+      "api": "https://aosikazy.com/api.php/provide/vod",
       "name": "奥斯卡资源"
     },
     "jinying": {
