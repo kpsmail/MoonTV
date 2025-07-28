@@ -85,33 +85,18 @@
       "api": "https://zy.xmm.hk/api.php/provide/vod",
       "name": "小猫咪资源"
     },
-    "18": {
+    "bwzyz": {
       "api": "https://api.bwzyz.com/api.php/provide/vod",
-      "name": "18"
-    },
-    "huweiba": {
-      "api": "https://hw8.live/api.php/provide/vod",
-      "name": "华为吧|点播"
-    },
-    "fuju": {
-      "api": "http://www.fuju2024.cc:8013/ruifenglb_api.php/provide/vod",
-      "name": "腐剧|点播"
+      "name": "18百万色片"
     },
     "jinying": {
       "api": "https://jinyingzy.com/api.php/provide/vod",
       "name": "金鹰|点播"
     },
-    "ok": {
-      "api": "https://okzyw9.com/api.php/provide/vod",
-      "name": "OK|点播"
-    },
-    "baopian": {
-      "api": "https://zpsps.com/api.php/provide/vod",
-      "name": "宝片|点播"
-    },
-    "xiaohuangren": {
-      "api": "https://iqyi.xiaohuangrentv.com/api.php/provide/vod",
-      "name": "小黄人|点播"
+    "pbpan": {
+      "api": "https://dh.ha.cn/api.php/provide/vod",
+      "name": "瀑布盘|点播",
+      "detail": "www.pbpan.com"
     },
     "niuniu": {
       "api": "https://api.niuniuzy.me/api.php/provide/vod",
@@ -120,14 +105,6 @@
     "yaya": {
       "api": "https://cj.yayazy.net/api.php/provide/vod",
       "name": "丫丫|点播"
-    },
-    "yingtu": {
-      "api": "https://cj.vodimg.top/api.php/provide/vod",
-      "name": "影图|点播"
-    },
-    "uku": {
-      "api": "https://api.ukuapi.com/api.php/provide/vod",
-      "name": "U酷|点播"
     },
     "haohua": {
       "api": "https://hhzyapi.com/api.php/provide/vod",
@@ -140,10 +117,6 @@
     "hongniu": {
       "api": "https://www.hongniuzy2.com/api.php/provide/vod",
       "name": "红牛|点播"
-    },
-    "kuaiche": {
-      "api": "https://caiji.kczyapi.com/api.php/provide/vod",
-      "name": "快车|点播"
     },
     "shandian": {
       "api": "http://sdzyapi.com/api.php/provide/vod",
@@ -172,7 +145,33 @@
     "xinlang": {
       "api": "https://api.xinlangapi.com/xinlangapi.php/provide/vod",
       "name": "新浪|点播"
+    },
+    "yzzy": {
+      "api": "https://api.yzzy-api.com/inc/apijson.php/provide/vod",
+      "name": "优质资源库",
+      "detail": "yzzy.tv"
+    },
+    "aosika": {
+      "api": "https://aosikazy.com/api.php/provide/vod",
+      "name": "18奥斯卡"
+    },
+    "baidu": {
+      "api": "http://api.apibdzy.com/api.php/provide/vod",
+      "name": "百度资源"
+    },
+    "aidan": {
+      "api": "http://lovedan.net/api.php/provide/vod",
+      "name": "艾旦影视"
+    },
+    "kuaichezy": {
+      "api": "https://caiji.kuaichezy.org/api.php/provide/vod",
+      "name": "快车资源"
+    },
+    "guangsuapi": {
+      "api": "https://api.guangsuapi.com/api.php/provide/vod",
+      "name": "光速资源"
     }
   }
 }
+
 
