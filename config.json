@@ -87,11 +87,39 @@
     },
     "bwzyz": {
       "api": "https://api.bwzyz.com/api.php/provide/vod",
-      "name": "百万资源站"
+      "name": "百万资源站18"
     },
     "aosikazy": {
       "api": "https://aosikazy.com/api.php/provide/vod",
-      "name": "奥斯卡资源"
+      "name": "奥斯卡资源18"
+    },
+    "ckzy": {
+      "api": "https://www.ckzy1.com/api.php/provide/vod",
+      "name": "CK资源18"
+    },
+    "jkunzy": {
+      "api": "https://jkunzyapi.com/api.php/provide/vod",
+      "name": "jkun资源18"
+    },
+    "souavzy": {
+      "api": "https://api.souavzy.vip/api.php/provide/vod",
+      "name": "souav资源18"
+    },
+    "155zy": {
+      "api": "https://155api.com/api.php/provide/vod",
+      "name": "155资源18"
+    },
+    "lsbzy": {
+      "api": "https://apilsbzy1.com/api.php/provide/vod",
+      "name": "lsb资源18"
+    },
+    "hsckzy": {
+      "api": "https://hsckzy.vip/api.php/provide/vod",
+      "name": "黄色仓库资源18"
+    },
+    "yutuzy": {
+      "api": "https://yutuzy10.com/api.php/provide/vod",
+      "name": "yutu资源18"
     },
     "jinying": {
       "api": "https://jinyingzy.com/api.php/provide/vod",
