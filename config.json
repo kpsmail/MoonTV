@@ -207,15 +207,31 @@
     "query": "最新"
     },
     {
-      "name": "最新电视剧",
-      "type": "tv",
-      "query": "最新"
+      "name": "科幻电影",
+      "type": "movie",
+      "query": "科幻"
     },
     {
-      "name": "热门电影",
+      "name": "恐怖电影",
       "type": "movie",
+      "query": "恐怖"
+    },
+    {
+      "name": "动作电影",
+      "type": "movie",
+      "query": "动作"
+    },
+    {
+      "name": "热门电视剧",
+      "type": "tv",
       "query": "热门"
+    },
+    {
+      "name": "英剧",
+      "type": "tv",
+      "query": "英剧"
     }
+    
   ]
 }
 
