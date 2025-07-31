@@ -202,9 +202,19 @@
   },
   "custom_category": [
     {
-      "name": "最新",
-      "type": "movie",
+    "name": "最新电影",
+    "type": "movie",
+    "query": "最新"
+    },
+    {
+      "name": "最新电视剧",
+      "type": "tv",
       "query": "最新"
+    },
+    {
+      "name": "热门电影",
+      "type": "movie",
+      "query": "热门"
     }
   ]
 }
