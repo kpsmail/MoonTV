@@ -205,15 +205,7 @@
       "name": "最新",
       "type": "movie",
       "query": "最新"
-    },
-      "name": "恐怖",
-      "type": "movie",
-      "query": "恐怖"
-    },
-      "name": "科幻",
-      "type": "movie",
-      "query": "科幻"
-    },
+    }
   ]
 }
 
