@@ -199,7 +199,14 @@
       "api": "https://api.guangsuapi.com/api.php/provide/vod",
       "name": "光速资源"
     }
-  }
+  },
+  "custom_category": [
+    {
+      "name": "科幻",
+      "type": "movie",
+      "query": "科幻"
+    }
+  ]
 }
 
 
