@@ -242,21 +242,6 @@
       "query": "热门"
     },
     {
-      "name": "科幻",
-      "type": "tv",
-      "query": "科幻"
-    },
-    {
-      "name": "恐怖",
-      "type": "tv",
-      "query": "恐怖"
-    },
-    {
-      "name": "奇幻",
-      "type": "tv",
-      "query": "奇幻"
-    },
-    {
       "name": "英剧",
       "type": "tv",
       "query": "英剧"
