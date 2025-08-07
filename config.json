@@ -232,11 +232,6 @@
       "query": "情色"
     },
     {
-      "name": "三级",
-      "type": "movie",
-      "query": "三级"
-    },
-    {
       "name": "热门电视剧",
       "type": "tv",
       "query": "热门"
