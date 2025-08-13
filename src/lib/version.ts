@@ -2,7 +2,7 @@
 
 'use client';
 
-const CURRENT_VERSION = '1.1.1';
+const CURRENT_VERSION = '2.0.1';
 
 // 版本检查结果枚举
 export enum UpdateStatus {
@@ -13,8 +13,7 @@ export enum UpdateStatus {
 
 // 远程版本检查URL配置
 const VERSION_CHECK_URLS = [
-  'https://raw.githubusercontent.com/LunaTechLab/MoonTV/main/VERSION.txt',
-  'https://cdn.jsdelivr.net/gh/LunaTechLab/moontv/VERSION.txt',
+  'https://raw.githubusercontent.com/MoonTechLab/LunaTV/main/VERSION.txt',
 ];
 
 /**

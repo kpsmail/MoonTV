@@ -11,6 +11,34 @@ export interface ChangelogEntry {
 
 export const changelog: ChangelogEntry[] = [
   {
+    version: "2.0.1",
+    date: "2025-08-13",
+    added: [
+      // 无新增内容
+    ],
+    changed: [
+    "版本检查和变更日志请求 Github"
+    ],
+    fixed: [
+    "微调管理面板样式"
+    ]
+  },
+  {
+    version: "2.0.0",
+    date: "2025-08-13",
+    added: [
+    "支持配置文件在线配置和编辑",
+    "搜索页搜索框实时联想",
+    "去除对 localstorage 模式的支持"
+    ],
+    changed: [
+    "播放记录删除按钮改为垃圾桶图标以消除歧义"
+    ],
+    fixed: [
+    "限制设置面板的最大长度，防止超出视口"
+    ]
+  },
+  {
     version: "1.1.1",
     date: "2025-08-12",
     added: [
