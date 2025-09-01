@@ -1,23 +1,18 @@
-import { NextResponse } from 'next/server';
+/* eslint-disable no-console */
 
-import { getAvailableApiSites, getCacheTime } from '@/lib/config';
+import { NextRequest, NextResponse } from 'next/server';
 
-export const runtime = 'edge';
+import { getAvailableApiSites } from '@/lib/config';
+
+export const runtime = 'nodejs';
 
 // OrionTV 兼容接口
-export async function GET() {
+export async function GET(request: NextRequest) {
+  console.log('request', request.url);
   try {
     const apiSites = await getAvailableApiSites();
-    const cacheTime = await getCacheTime();
 
-    return NextResponse.json(apiSites, {
-      headers: {
-        'Cache-Control': `public, max-age=${cacheTime}, s-maxage=${cacheTime}`,
-        'CDN-Cache-Control': `public, s-maxage=${cacheTime}`,
-        'Vercel-CDN-Cache-Control': `public, s-maxage=${cacheTime}`,
-        'Netlify-Vary': 'query',
-      },
-    });
+    return NextResponse.json(apiSites);
   } catch (error) {
     return NextResponse.json({ error: '获取资源失败' }, { status: 500 });
   }

@@ -2,31 +2,23 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
+import { AdminConfig } from '@/lib/admin.types';
 import { getAuthInfoFromCookie } from '@/lib/auth';
-import { getConfig } from '@/lib/config';
+import { getAvailableApiSites, getConfig } from '@/lib/config';
 import { searchFromApi } from '@/lib/downstream';
+import { yellowWords } from '@/lib/yellow';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function GET(request: NextRequest) {
   try {
     // 从 cookie 获取用户信息
     const authInfo = getAuthInfoFromCookie(request);
-    if (!authInfo) {
+    if (!authInfo || !authInfo.username) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const config = await getConfig();
-    if (config.UserConfig.Users) {
-      // 检查用户是否被封禁
-      const user = config.UserConfig.Users.find(
-        (u) => u.username === authInfo.username
-      );
-      if (user && user.banned) {
-        return NextResponse.json({ error: '用户已被封禁' }, { status: 401 });
-      }
-    }
-
     const { searchParams } = new URL(request.url);
     const query = searchParams.get('q')?.trim();
 
@@ -35,7 +27,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 生成建议
-    const suggestions = await generateSuggestions(query);
+    const suggestions = await generateSuggestions(config, query, authInfo.username);
 
     // 从配置中获取缓存时间，如果没有配置则使用默认值300秒（5分钟）
     const cacheTime = config.SiteConfig.SiteInterfaceCacheTime || 300;
@@ -57,7 +49,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-async function generateSuggestions(query: string): Promise<
+async function generateSuggestions(config: AdminConfig, query: string, username: string): Promise<
   Array<{
     text: string;
     type: 'exact' | 'related' | 'suggestion';
@@ -66,8 +58,7 @@ async function generateSuggestions(query: string): Promise<
 > {
   const queryLower = query.toLowerCase();
 
-  const config = await getConfig();
-  const apiSites = config.SourceConfig.filter((site: any) => !site.disabled);
+  const apiSites = await getAvailableApiSites(username);
   let realKeywords: string[] = [];
 
   if (apiSites.length > 0) {
@@ -78,6 +69,7 @@ async function generateSuggestions(query: string): Promise<
     realKeywords = Array.from(
       new Set(
         results
+          .filter((r: any) => config.SiteConfig.DisableYellowFilter || !yellowWords.some((word: string) => (r.type_name || '').includes(word)))
           .map((r: any) => r.title)
           .filter(Boolean)
           .flatMap((title: string) => title.split(/[ -:：·、-]/))

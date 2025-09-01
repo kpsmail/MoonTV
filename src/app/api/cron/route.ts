@@ -1,19 +1,22 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console,@typescript-eslint/no-explicit-any */
 
+import * as crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { getConfig, refineConfig } from '@/lib/config';
 import { db } from '@/lib/db';
 import { fetchVideoDetail } from '@/lib/fetchVideoDetail';
+import { refreshLiveChannels } from '@/lib/live';
 import { SearchResult } from '@/lib/types';
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 
 export async function GET(request: NextRequest) {
   console.log(request.url);
   try {
     console.log('Cron job triggered:', new Date().toISOString());
 
-    refreshRecordAndFavorites();
+    cronJob();
 
     return NextResponse.json({
       success: true,
@@ -35,14 +38,76 @@ export async function GET(request: NextRequest) {
   }
 }
 
-async function refreshRecordAndFavorites() {
-  if (
-    (process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage') === 'localstorage'
-  ) {
-    console.log('跳过刷新：当前使用 localstorage 存储模式');
-    return;
-  }
+async function cronJob() {
+  await refreshConfig();
+  await refreshAllLiveChannels();
+  await refreshRecordAndFavorites();
+}
 
+async function refreshAllLiveChannels() {
+  const config = await getConfig();
+
+  // 并发刷新所有启用的直播源
+  const refreshPromises = (config.LiveConfig || [])
+    .filter(liveInfo => !liveInfo.disabled)
+    .map(async (liveInfo) => {
+      try {
+        const nums = await refreshLiveChannels(liveInfo);
+        liveInfo.channelNumber = nums;
+      } catch (error) {
+        console.error(`刷新直播源失败 [${liveInfo.name || liveInfo.key}]:`, error);
+        liveInfo.channelNumber = 0;
+      }
+    });
+
+  // 等待所有刷新任务完成
+  await Promise.all(refreshPromises);
+
+  // 保存配置
+  await db.saveAdminConfig(config);
+}
+
+async function refreshConfig() {
+  let config = await getConfig();
+  if (config && config.ConfigSubscribtion && config.ConfigSubscribtion.URL && config.ConfigSubscribtion.AutoUpdate) {
+    try {
+      const response = await fetch(config.ConfigSubscribtion.URL);
+
+      if (!response.ok) {
+        throw new Error(`请求失败: ${response.status} ${response.statusText}`);
+      }
+
+      const configContent = await response.text();
+
+      // 对 configContent 进行 base58 解码
+      let decodedContent;
+      try {
+        const bs58 = (await import('bs58')).default;
+        const decodedBytes = bs58.decode(configContent);
+        decodedContent = new TextDecoder().decode(decodedBytes);
+      } catch (decodeError) {
+        console.warn('Base58 解码失败:', decodeError);
+        throw decodeError;
+      }
+
+      try {
+        JSON.parse(decodedContent);
+      } catch (e) {
+        throw new Error('配置文件格式错误，请检查 JSON 语法');
+      }
+      config.ConfigFile = decodedContent;
+      config.ConfigSubscribtion.LastCheck = new Date().toISOString();
+      config = refineConfig(config);
+      await db.saveAdminConfig(config);
+    } catch (e) {
+      console.error('刷新配置失败:', e);
+    }
+  } else {
+    console.log('跳过刷新：未配置订阅地址或自动更新');
+  }
+}
+
+async function refreshRecordAndFavorites() {
   try {
     const users = await db.getAllUsers();
     if (process.env.USERNAME && !users.includes(process.env.USERNAME)) {
@@ -135,7 +200,10 @@ async function refreshRecordAndFavorites() {
 
       // 收藏
       try {
-        const favorites = await db.getAllFavorites(user);
+        let favorites = await db.getAllFavorites(user);
+        favorites = Object.fromEntries(
+          Object.entries(favorites).filter(([_, fav]) => fav.origin !== 'live')
+        );
         const totalFavorites = Object.keys(favorites).length;
         let processedFavorites = 0;
 
