@@ -2,7 +2,7 @@
 
 'use client';
 
-import { Cat, Clover, Film, Home, Menu, Search, Star, Tv } from 'lucide-react';
+import { Cat, Clover, Film, Home, Menu, Radio, Search, Star, Tv } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -13,8 +13,6 @@ import {
   useLayoutEffect,
   useState,
 } from 'react';
-
-import { getCustomCategories } from '@/lib/config.client';
 
 import { useSite } from './SiteProvider';
 
@@ -147,21 +145,25 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       label: '综艺',
       href: '/douban?type=show',
     },
+    {
+      icon: Radio,
+      label: '直播',
+      href: '/live',
+    },
   ]);
 
   useEffect(() => {
-    getCustomCategories().then((categories) => {
-      if (categories.length > 0) {
-        setMenuItems((prevItems) => [
-          ...prevItems,
-          {
-            icon: Star,
-            label: '自定义',
-            href: '/douban?type=custom',
-          },
-        ]);
-      }
-    });
+    const runtimeConfig = (window as any).RUNTIME_CONFIG;
+    if (runtimeConfig?.CUSTOM_CATEGORIES?.length > 0) {
+      setMenuItems((prevItems) => [
+        ...prevItems,
+        {
+          icon: Star,
+          label: '自定义',
+          href: '/douban?type=custom',
+        },
+      ]);
+    }
   }, []);
 
   return (

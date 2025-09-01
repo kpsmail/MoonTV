@@ -1,6 +1,7 @@
 /* eslint-disable no-console, @typescript-eslint/no-explicit-any, @typescript-eslint/no-non-null-assertion */
 
 import { AdminConfig } from './admin.types';
+import { KvrocksStorage } from './kvrocks.db';
 import { RedisStorage } from './redis.db';
 import { Favorite, IStorage, PlayRecord, SkipConfig } from './types';
 import { UpstashRedisStorage } from './upstash.db';
@@ -11,6 +12,7 @@ const STORAGE_TYPE =
     | 'localstorage'
     | 'redis'
     | 'upstash'
+    | 'kvrocks'
     | undefined) || 'localstorage';
 
 // 创建存储实例
@@ -20,6 +22,8 @@ function createStorage(): IStorage {
       return new RedisStorage();
     case 'upstash':
       return new UpstashRedisStorage();
+    case 'kvrocks':
+      return new KvrocksStorage();
     case 'localstorage':
     default:
       return null as unknown as IStorage;
@@ -29,7 +33,7 @@ function createStorage(): IStorage {
 // 单例存储实例
 let storageInstance: IStorage | null = null;
 
-export function getStorage(): IStorage {
+function getStorage(): IStorage {
   if (!storageInstance) {
     storageInstance = createStorage();
   }
@@ -142,6 +146,14 @@ export class DbManager {
     return this.storage.checkUserExist(userName);
   }
 
+  async changePassword(userName: string, newPassword: string): Promise<void> {
+    await this.storage.changePassword(userName, newPassword);
+  }
+
+  async deleteUser(userName: string): Promise<void> {
+    await this.storage.deleteUser(userName);
+  }
+
   // ---------- 搜索历史 ----------
   async getSearchHistory(userName: string): Promise<string[]> {
     return this.storage.getSearchHistory(userName);
@@ -217,6 +229,15 @@ export class DbManager {
       return (this.storage as any).getAllSkipConfigs(userName);
     }
     return {};
+  }
+
+  // ---------- 数据清理 ----------
+  async clearAllData(): Promise<void> {
+    if (typeof (this.storage as any).clearAllData === 'function') {
+      await (this.storage as any).clearAllData();
+    } else {
+      throw new Error('存储类型不支持清空数据操作');
+    }
   }
 }
 

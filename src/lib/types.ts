@@ -23,6 +23,7 @@ export interface Favorite {
   cover: string;
   save_time: number; // 记录保存时间（时间戳）
   search_title: string; // 搜索时使用的标题
+  origin?: 'vod' | 'live';
 }
 
 // 存储接口
@@ -79,6 +80,9 @@ export interface IStorage {
   ): Promise<void>;
   deleteSkipConfig(userName: string, source: string, id: string): Promise<void>;
   getAllSkipConfigs(userName: string): Promise<{ [key: string]: SkipConfig }>;
+
+  // 数据清理相关
+  clearAllData(): Promise<void>;
 }
 
 // 搜索结果数据结构

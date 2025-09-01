@@ -2,12 +2,10 @@
 
 'use client';
 
-import { Cat, Clover, Film, Home, Search, Star, Tv } from 'lucide-react';
+import { Cat, Clover, Film, Home, Radio, Star, Tv } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
-import { getCustomCategories } from '@/lib/config.client';
 
 interface MobileBottomNavProps {
   /**
@@ -24,7 +22,6 @@ const MobileBottomNav = ({ activePath }: MobileBottomNavProps) => {
 
   const [navItems, setNavItems] = useState([
     { icon: Home, label: '首页', href: '/' },
-    { icon: Search, label: '搜索', href: '/search' },
     {
       icon: Film,
       label: '电影',
@@ -45,21 +42,25 @@ const MobileBottomNav = ({ activePath }: MobileBottomNavProps) => {
       label: '综艺',
       href: '/douban?type=show',
     },
+    {
+      icon: Radio,
+      label: '直播',
+      href: '/live',
+    },
   ]);
 
   useEffect(() => {
-    getCustomCategories().then((categories) => {
-      if (categories.length > 0) {
-        setNavItems((prevItems) => [
-          ...prevItems,
-          {
-            icon: Star,
-            label: '自定义',
-            href: '/douban?type=custom',
-          },
-        ]);
-      }
-    });
+    const runtimeConfig = (window as any).RUNTIME_CONFIG;
+    if (runtimeConfig?.CUSTOM_CATEGORIES?.length > 0) {
+      setNavItems((prevItems) => [
+        ...prevItems,
+        {
+          icon: Star,
+          label: '自定义',
+          href: '/douban?type=custom',
+        },
+      ]);
+    }
   }, []);
 
   const isActive = (href: string) => {
@@ -101,8 +102,8 @@ const MobileBottomNav = ({ activePath }: MobileBottomNavProps) => {
               >
                 <item.icon
                   className={`h-6 w-6 ${active
-                      ? 'text-green-600 dark:text-green-400'
-                      : 'text-gray-500 dark:text-gray-400'
+                    ? 'text-green-600 dark:text-green-400'
+                    : 'text-gray-500 dark:text-gray-400'
                     }`}
                 />
                 <span
